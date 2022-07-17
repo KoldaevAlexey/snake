@@ -1,3 +1,10 @@
+h1 {
+  color: white;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+}
+
 body {
   background-color: black;
 }
@@ -6,6 +13,23 @@ canvas {
   margin: 0 auto;
   justify-content: center;
   display: flex;
-  border: 2px solid red;
-  background-color: blue;
+  border: 2px solid gold;
+  background-color: black;
+}
+
+.rating-wrapper {
+  color: white;
+}
+
+.modal-wrapper {
+  margin: 0 auto;
+  justify-content: center;
+  display: none;
+  background-color: aqua;
+  height: 400px;
+  width: 400px;
+}
+
+.modal-result {
+  color: black;
 }
