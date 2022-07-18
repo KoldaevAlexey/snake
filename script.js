@@ -3,14 +3,17 @@
 const canvas = document.querySelector("#playing-field"),
   ctx = canvas.getContext("2d"),
   scoreLabel = document.querySelector("h1"),
-  resultModal = document.querySelector(".modal-wrapper");
+  resultModal = document.querySelector(".modal-wrapper"),
+  btnConfirm = resultModal.querySelector(".btn-confirm"),
+  inputName = resultModal.querySelector(".modal_input");
 
 const config = {
   grid: 16,
   count: 0,
 };
 
-let score = 0;
+let currentScore = 0;
+let players;
 
 const snake = {
   x: 160,
@@ -27,7 +30,7 @@ const apple = {
 };
 
 let n = 4,
-  a = false;
+  pausedCheck = false;
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -36,13 +39,13 @@ function getRandomInt(min, max) {
 function loop() {
   requestAnimationFrame(loop);
 
-  a === true ? (n = 10000) : (n = 4);
+  pausedCheck === true ? (n = 10000) : (n = 4);
 
   if (++config.count < n) {
     return;
   }
 
-  scoreLabel.textContent = `ОЧКИ: ${score}`;
+  scoreLabel.textContent = `ОЧКИ: ${currentScore}`;
   config.count = 0;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -74,7 +77,7 @@ function loop() {
 
     if (cell.x === apple.x && cell.y === apple.y) {
       snake.maxCells++;
-      score++;
+      currentScore++;
 
       apple.x = getRandomInt(0, 25) * config.grid;
       apple.y = getRandomInt(0, 25) * config.grid;
@@ -89,12 +92,13 @@ function loop() {
         snake.cells = [];
         snake.maxCells = 4;
 
-        //test
-        canvas.style.display = "none";
-        resultModal.style.display = "flex";
-        resultModal.textContent = `РЕУЗЛЬТАТ - ${score}`;
+        canvas.classList.add("hide");
+        canvas.classList.remove("show");
 
-        score = 0;
+        resultModal.classList.add("show");
+        resultModal.classList.remove("hide");
+
+        pausedCheck = true;
 
         apple.x = getRandomInt(0, 25) * config.grid;
         apple.y = getRandomInt(0, 25) * config.grid;
@@ -122,8 +126,44 @@ function direction(e) {
     snake.dx = 0;
   }
   if (e.keyCode === 32) {
-    a ? (a = false) : (a = true);
+    pausedCheck ? (pausedCheck = false) : (pausedCheck = true);
   }
+}
+
+btnConfirm.addEventListener("click", () => {
+  if (!localStorage.getItem("players")) {
+    players = [];
+  } else {
+    players = JSON.parse(localStorage.getItem("players"));
+  }
+
+  players.push({ name: inputName.value, score: currentScore });
+
+  let jsonPlayers = JSON.stringify(players);
+  localStorage.setItem("players", jsonPlayers);
+
+  players.sort((a, b) => {
+    return b.score - a.score;
+  });
+
+  resultModal.classList.add("hide");
+  resultModal.classList.remove("show");
+
+  canvas.classList.add("show");
+  canvas.classList.remove("hide");
+
+  pausedCheck = false;
+  currentScore = 0;
+
+  for (let i = 0; i < players.length; i++) {
+    addRatingList(players[i].name, players[i].score);
+  }
+});
+
+function addRatingList(name, score) {
+  let playerList = document.createElement("li");
+  document.querySelector(".rating").append(playerList);
+  playerList.textContent = `${name} : ${score}`;
 }
 
 requestAnimationFrame(loop);

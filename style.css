@@ -12,7 +12,7 @@ body {
 canvas {
   margin: 0 auto;
   justify-content: center;
-  display: flex;
+  display: none;
   border: 2px solid gold;
   background-color: black;
 }
@@ -23,13 +23,34 @@ canvas {
 
 .modal-wrapper {
   margin: 0 auto;
-  justify-content: center;
-  display: none;
-  background-color: aqua;
-  height: 400px;
-  width: 400px;
+  justify-content: auto;
+  height: 200px;
+  width: 200px;
 }
 
-.modal-result {
+.modal_input {
+  margin-top: 20px;
   color: black;
+  height: 50px;
+  width: 200px;
+  font-size: xx-large;
+}
+
+.btn-confirm {
+  margin-top: 20px;
+  height: 40px;
+  width: 210px;
+  font-size: large;
+}
+
+li {
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }

@@ -7,17 +7,19 @@
   <body>
     <h1>ОЧКИ:</h1>
     <div class="rating-wrapper">
-      <div class="rating">
-        РЕЗУЛЬТАТЫ:
-        <li>Петя: 50 очков</li>
-        <li>Вова: 48 очков</li>
-      </div>
+      <div class="rating">ЧЕМПИОНЫ:</div>
     </div>
-    <div class="modal-wrapper">
-      <div class="modal-result">РЕЗУЛЬТАТ-</div>
+    <div class="modal-wrapper hide">
+      <input
+        type="text"
+        placeholder="Никнейм"
+        name="name"
+        class="modal_input"
+      />
+      <button class="btn-confirm">OKAY</button>
     </div>
     <div class="play_wrapper">
-      <canvas id="playing-field" width="400" height="400"></canvas>
+      <canvas class="show" id="playing-field" width="400" height="400"></canvas>
     </div>
     <script src="script.js"></script>
   </body>
