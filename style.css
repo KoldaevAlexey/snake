@@ -9,27 +9,38 @@ body {
   background-color: black;
 }
 
-canvas {
+.canvas_wrapper {
+  border: 1px solid red;
+  height: 400px;
+  width: 400px;
   margin: 0 auto;
-  justify-content: center;
-  display: none;
+  position: relative;
+}
+
+canvas {
   border: 2px solid gold;
   background-color: black;
+  margin: 0 auto;
+  position: relative;
 }
 
 .rating-wrapper {
   color: white;
+  width: 400px;
+  position: absolute;
+  font-size: xx-large;
+  cursor: default;
 }
 
 .modal-wrapper {
   margin: 0 auto;
-  justify-content: auto;
+  justify-content: center;
   height: 200px;
   width: 200px;
 }
 
 .modal_input {
-  margin-top: 20px;
+  margin-top: 150px;
   color: black;
   height: 50px;
   width: 200px;
@@ -37,10 +48,13 @@ canvas {
 }
 
 .btn-confirm {
-  margin-top: 20px;
+  position: relative;
   height: 40px;
-  width: 210px;
-  font-size: large;
+  width: 208px;
+  font-size: xx-large;
+  background-color: black;
+  color: red;
+  cursor: pointer;
 }
 
 li {
@@ -53,4 +67,13 @@ li {
 
 .show {
   display: block;
+}
+
+.btn-confirm:hover {
+  color: yellow;
+}
+
+li:hover {
+  color: yellow;
+  font-size: 120%;
 }

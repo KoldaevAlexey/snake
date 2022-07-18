@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>ОЧКИ:</h1>
+    <h1>SCORE:</h1>
     <div class="rating-wrapper">
-      <div class="rating">ЧЕМПИОНЫ:</div>
+      <ol class="rating"></ol>
     </div>
     <div class="modal-wrapper hide">
       <input
+        maxlength="12"
         type="text"
         placeholder="Никнейм"
         name="name"
@@ -18,9 +19,7 @@
       />
       <button class="btn-confirm">OKAY</button>
     </div>
-    <div class="play_wrapper">
-      <canvas class="show" id="playing-field" width="400" height="400"></canvas>
-    </div>
+    <canvas class="show" id="playing-field" width="400" height="400"></canvas>
     <script src="script.js"></script>
   </body>
 </html>

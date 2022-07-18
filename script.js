@@ -15,6 +15,23 @@ const config = {
 let currentScore = 0;
 let players;
 
+if (!localStorage.getItem("players")) {
+  players = [];
+} else {
+  players = JSON.parse(localStorage.getItem("players"));
+
+  let jsonPlayers = JSON.stringify(players);
+  localStorage.setItem("players", jsonPlayers);
+
+  players.sort((a, b) => {
+    return b.score - a.score;
+  });
+
+  for (let i = 0; i < players.length; i++) {
+    addRatingList(players[i].name, players[i].score);
+  }
+}
+
 const snake = {
   x: 160,
   y: 160,
@@ -131,12 +148,6 @@ function direction(e) {
 }
 
 btnConfirm.addEventListener("click", () => {
-  if (!localStorage.getItem("players")) {
-    players = [];
-  } else {
-    players = JSON.parse(localStorage.getItem("players"));
-  }
-
   players.push({ name: inputName.value, score: currentScore });
 
   let jsonPlayers = JSON.stringify(players);
@@ -155,12 +166,18 @@ btnConfirm.addEventListener("click", () => {
   pausedCheck = false;
   currentScore = 0;
 
+  document.querySelectorAll("li").forEach((item) => {
+    item.remove();
+  });
   for (let i = 0; i < players.length; i++) {
     addRatingList(players[i].name, players[i].score);
   }
 });
 
 function addRatingList(name, score) {
+  if (players.length > 10) {
+    players.pop();
+  }
   let playerList = document.createElement("li");
   document.querySelector(".rating").append(playerList);
   playerList.textContent = `${name} : ${score}`;
